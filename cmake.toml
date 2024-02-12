@@ -1,0 +1,52 @@
+# Reference: https://build-cpp.github.io/cmkr/cmake-toml
+[project]
+name = "sourcemod_cmkr"
+
+[target.amtl]
+type="interface"
+include-directories=[
+  "sourcemod/public/amtl",
+  "sourcemod/public/amtl/amtl",
+]
+alias="amtl::amtl"
+
+[target.smsdk]
+type="interface"
+include-directories=[
+  "sourcemod/",
+  "sourcemod/core",
+  "sourcemod/public",
+  "sourcemod/sourcepawn/include",
+]
+alias="smsdk::smsdk"
+
+[target.mmsdk]
+type="interface"
+include-directories=[
+  "metamod/core",
+  # "metamod/core/sourechook"
+]
+alias="mmsdk::mmsdk"
+
+[target.extension]
+type="shared"
+sources=[
+  "extension/**.cpp",
+  "extension/**.h",
+  "sourcemod/public/smsdk_ext.cpp",
+]
+include-directories=[
+  "extension",
+]
+compile-features = ["cxx_std_20"]
+clang.compile-options = [
+  #"-stdlib=libc++",
+  "-Wimplicit-exception-spec-mismatch",
+  "-m32", # compile as x86 library
+  "-Wno-non-virtual-dtor",
+  "-Wno-delete-non-virtual-dtor",
+]
+clang.link-options = [
+  #"-stdlib=libc++",
+  "-m32"]
+link-libraries=["amtl::amtl", "smsdk::smsdk", "mmsdk::mmsdk"]
