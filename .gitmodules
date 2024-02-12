@@ -1,6 +1,0 @@
-[submodule "metamod"]
-	path = metamod
-	url = https://github.com/alliedmodders/metamod-source
-[submodule "sourcemod"]
-	path = sourcemod
-	url = https://github.com/alliedmodders/sourcemod
